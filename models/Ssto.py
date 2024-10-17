@@ -1,6 +1,6 @@
 import krpc
 import time
-import MyVessel
+from models import MyVessel
 import math
 
 
@@ -10,12 +10,6 @@ class SSTO(MyVessel.MyVessel):
 
         self.name = 'SSTO'
         self.landing_gear = [part for part in self.vessel.parts.wheels]
-
-        self.current_pitch = 0
-        self.goal_heading = 90
-        self.goal_altitude = 1000
-        self.goal_apoapsis = 70000
-        self.goal_periapsis = 70000
 
     def get_pitch(self):
         self.current_pitch = self.vessel.flight().pitch
@@ -49,7 +43,6 @@ class SSTO(MyVessel.MyVessel):
                 if any(gear.deployed for gear in self.landing_gear):
                     self.vessel.control.gear = False
                     self.vessel.control.throttle = 1.0
-            # self.get_speed()
             self.vessel.auto_pilot.target_pitch_and_heading(10, 90)
             self.vessel.auto_pilot.engage()
             self.vessel.auto_pilot.wait()
@@ -91,13 +84,8 @@ class SSTO(MyVessel.MyVessel):
         count = 0
 
         while self.vessel.orbit.apoapsis_altitude > self.goal_apoapsis:
-            if count == 4:
-                print(f"Apoapsis: {self.vessel.orbit.apoapsis_altitude} Altitude: {self.vessel.flight().mean_altitude}")
-                count = 0
             if self.vessel.flight().mean_altitude > self.goal_apoapsis - 1000:
                 self.final_burn()
-            count += 1
-            time.sleep(1)
 
         if self.vessel.orbit.apoapsis_altitude < self.goal_apoapsis:
             self.climb()

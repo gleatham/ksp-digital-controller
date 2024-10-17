@@ -1,5 +1,5 @@
 import time
-import MyVessel
+from models import MyVessel
 import math
 
 class Rocket(MyVessel.MyVessel):

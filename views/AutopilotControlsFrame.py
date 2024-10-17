@@ -13,15 +13,15 @@ class AutopilotControlsFrame(tk.Frame):
 
         self.fly_level_button = tk.Button(self.autopilot_controls_frame, text='Fly Level', width=8)
         self.engage_button = tk.Button(self.autopilot_controls_frame, text='Engage', width=8)
-        self.target_pitch_default = tk.IntVar(self.autopilot_controls_frame, value=0)
+        self.target_pitch_var = tk.IntVar(self.autopilot_controls_frame, value=0)
         self.target_pitch_spinbox = tk.Spinbox(self.autopilot_controls_frame, from_=-90, to=90, width=5,
-                                          repeatdelay=500, repeatinterval=100,
-                                          textvariable=self.target_pitch_default)
+                                               repeatdelay=500, repeatinterval=100,
+                                               textvariable=self.target_pitch_var)
         self.target_pitch_label = tk.Label(self.autopilot_controls_frame, text='Target Pitch:')
-        self.target_heading_default = tk.IntVar(self.autopilot_controls_frame, value=90)
+        self.target_heading_var = tk.IntVar(self.autopilot_controls_frame, value=90)
         self.target_heading_spinbox = tk.Spinbox(self.autopilot_controls_frame, from_=0, to=359, width=5,
-                                            repeatdelay=500, repeatinterval=100,
-                                            textvariable=self.target_heading_default)
+                                                 repeatdelay=500, repeatinterval=100,
+                                                 textvariable=self.target_heading_var)
         self.target_heading_label = tk.Label(self.autopilot_controls_frame, text='Target Heading:')
 
         # Grid

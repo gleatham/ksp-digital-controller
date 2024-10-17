@@ -10,6 +10,13 @@ class MyVessel:
         self.vessel.control.sas = False
         self.vessel.control.sas_mode.stability_assist = False
 
+        # Set Defaults
+        self.current_pitch = 0
+        self.goal_heading = 90
+        self.goal_altitude = 1000
+        self.goal_apoapsis = 70000
+        self.goal_periapsis = 70000
+
         # Setup Streams
         flight_info = self.vessel.flight()
         self.current_altitude = self.conn.add_stream(getattr, flight_info, 'mean_altitude')
@@ -39,6 +46,10 @@ class MyVessel:
     def launch(self):
         self.vessel.control.throttle = 1.0
         self.vessel.control.activate_next_stage()
+
+    def engage_autopilot(self):
+        # Needs target pitch and target heading
+        pass
 
     def calculate_hohmann_transfer(self):
         pass
