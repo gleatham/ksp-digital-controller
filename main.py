@@ -1,16 +1,12 @@
 import tkinter as tk
 from tkinter import ttk
 import threading
-import views.BaseControlsFrame
-'''
-import views.AutopilotControlsFrame
-import views.VesselResourcesFrame
-import views.SpecialtyControlsFrame
-import views.ExperimentsFrame
-import models.MyVessel
-import models.Ssto
-import models.rocket
-'''
+from views import AutopilotControlsFrame
+from views import BaseControlsFrame
+from views import ExperimentsFrame
+from views import SpecialtyControlsFrame
+from views import TelemetryStreamsFrame
+from views import VesselResourcesFrame
 
 class App:
     def __init__(self):
@@ -22,9 +18,12 @@ if __name__ == '__main__':
     root.geometry('1000x800')
     root.title('KRPC - Digital Controller')
 
-    base_controls = views.BaseControlsFrame.BaseControlsFrame(root)
+    telemetry_stream = TelemetryStreamsFrame.TelemetryStreamsFrame(root, 0, 0)
+    base_controls = BaseControlsFrame.BaseControlsFrame(root, 1, 1)
+    autopilot_controls = AutopilotControlsFrame.AutopilotControlsFrame(root, 2, 0)
+    experiments = ExperimentsFrame.ExperimentsFrame(root, 0, 1)
+    specialty_controls = SpecialtyControlsFrame.SpecialtyControlsFrame(root, 0, 2)
+    vessel_resources = VesselResourcesFrame.VesselResourcesFrame(root, 1, 0)
 
-    # base_controls.grid(row=0, column=0, sticky='nsew')
-    base_controls.pack()
 
     root.mainloop()

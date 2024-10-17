@@ -1,7 +1,9 @@
 import tkinter as tk
 
 class ExperimentsFrame(tk.Frame):
-    def __init__(self, parent):
-        super().__init__(parent)
+    def __init__(self, parent, row, col):
+        super().__init__()
 
-        experiments_frame = tk.LabelFrame(self, text='Experiment(s)', height=200, width=250,)
+        self.experiments_frame = tk.LabelFrame(parent, text='Experiment(s)', height=200, width=250,)
+        self.experiments_frame.grid(row=row, column=col)
+        self.experiments_frame.grid_propagate(False)

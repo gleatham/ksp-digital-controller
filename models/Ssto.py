@@ -151,22 +151,7 @@ class SSTO(MyVessel.MyVessel):
             pass
         self.vessel.control.throttle = 0.0
         node.remove()
-        '''
-        print("Final burn")
-        self.turn_on_sas()
-        self.vessel.auto_pilot.engage()
-        self.vessel.auto_pilot.reference_frame = self.vessel.orbital_reference_frame
-        self.vessel.auto_pilot.reference_frame = self.vessel.surface_velocity_reference_frame
-        self.vessel.auto_pilot.target_direction = (0, 1, 0)
-        self.vessel.auto_pilot.engage()
-        self.vessel.auto_pilot.wait()
 
-        while True:
-            self.vessel.control.throttle = 1.0
-            time.sleep(1)
-            if self.vessel.orbit.periapsis_altitude >= self.goal_periapsis:
-                break
-        '''
 
     def orbit(self):
         self.takeoff()

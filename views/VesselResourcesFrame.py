@@ -2,12 +2,15 @@ import tkinter as tk
 from tkinter import ttk
 
 class VesselResourcesFrame(tk.Frame):
-    def __init__(self, parent):
+    def __init__(self, parent, row, col):
         super().__init__(parent)
         # Vessel Resources Frame
         self.rocket_fuel_value = tk.IntVar()
 
-        self.vessel_resources_frame = tk.LabelFrame(self, text='Fuel', height=200, width=250)
+        self.vessel_resources_frame = tk.LabelFrame(parent, text='Fuel', height=200, width=250)
+        self.vessel_resources_frame.grid(row=row, column=col, padx=5, pady=5)
+        self.vessel_resources_frame.grid_propagate(False)
+
         self.rocket_fuel_progressbar = ttk.Progressbar(self.vessel_resources_frame, orient=tk.HORIZONTAL, length=100,
                                                   mode='determinate', variable=self.rocket_fuel_value)
         self.rocket_fuel_progressbar_label = tk.Label(self.vessel_resources_frame, text='Rocket Fuel')

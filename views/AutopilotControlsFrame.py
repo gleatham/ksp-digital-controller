@@ -2,12 +2,14 @@ import tkinter as tk
 
 
 class AutopilotControlsFrame(tk.Frame):
-    def __init__(self, parent):
+    def __init__(self, parent, row, col):
         super().__init__(parent)
 
-        self.autopilot_controls_frame = tk.LabelFrame(self, text='Auto Pilot', height=200, width=250,
+        self.autopilot_controls_frame = tk.LabelFrame(parent, text='Auto Pilot', height=200, width=250,
                                                  highlightthickness=3, highlightbackground='dark red',
                                                  padx=5, pady=5)
+        self.autopilot_controls_frame.grid(row=row, column=col, padx=5, pady=5)
+        self.autopilot_controls_frame.grid_propagate(False)
 
         self.fly_level_button = tk.Button(self.autopilot_controls_frame, text='Fly Level', width=8)
         self.engage_button = tk.Button(self.autopilot_controls_frame, text='Engage', width=8)
