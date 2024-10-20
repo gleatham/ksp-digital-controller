@@ -5,6 +5,9 @@ class AutopilotControlsFrame(tk.Frame):
     def __init__(self, parent, row, col):
         super().__init__(parent)
 
+        self.row = row
+        self.col = col
+
         self.autopilot_controls_frame = tk.LabelFrame(parent, text='Auto Pilot', height=200, width=250,
                                                  highlightthickness=3, highlightbackground='dark red',
                                                  padx=5, pady=5)

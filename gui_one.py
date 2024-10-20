@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import threading
-import Ssto
+# import Ssto
 
 def connect_ship():
     pass
