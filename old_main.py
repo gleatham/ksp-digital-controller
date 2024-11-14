@@ -1,6 +1,6 @@
 import tkinter as tk
 import threading
-import Ssto
+from models import Ssto
 
 
 def update_stream(ssto,
@@ -9,7 +9,7 @@ def update_stream(ssto,
                   apoapsis_stream_label,
                   periapsis_stream_label):
     while True:
-        altitude_stream_label.config(text=f"Altitude: {ssto.current_altitude():.0f}")
+        altitude_stream_label.config(text=f"Altitude: {ssto.current_altitude_stream():.0f}")
         speed_stream_label.config(text=f"Speed: {ssto.current_speed():.0f}")
         apoapsis_stream_label.config(text=f"Apoapsis: {ssto.current_apoapsis():.0f}")
         periapsis_stream_label.config(text=f"Periapsis: {ssto.current_periapsis():.0f}")

@@ -1,0 +1,14 @@
+{"default_settings":[
+  {"general":  [
+    {"dark_mode": "True"},
+    {"light_mode":  "False"}
+  ]},
+  {"frames": [
+    {"auto_pilot": "True"},
+    {"basic_controls": "True"},
+    {"experiments": "True"},
+    {"special": "True"},
+    {"telemetry": "True"},
+    {"resources": "True"}
+  ]}
+]}

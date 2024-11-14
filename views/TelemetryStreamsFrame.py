@@ -3,12 +3,14 @@ import tkinter as tk
 class TelemetryStreamsFrame(tk.Frame):
     def __init__(self, parent, row, col):
         super().__init__(parent)
-        self.altitude = tk.IntVar()
-        self.speed = tk.IntVar()
-        self.apoapsis = tk.IntVar()
-        self.periapsis = tk.IntVar()
-        self.latitude = tk.DoubleVar()
-        self.longitude = tk.DoubleVar()
+        #self.altitude = tk.IntVar()
+        #self.speed = tk.IntVar()
+        #self.apoapsis = tk.IntVar()
+        #self.periapsis = tk.IntVar()
+        #self.latitude = tk.DoubleVar()
+        #self.longitude = tk.DoubleVar()
+
+        #self.altitude = altitude
 
         # Main Streams Frame
         self.streams_frame = tk.LabelFrame(parent, text='Telemetry', height=200, width=250,
@@ -17,12 +19,12 @@ class TelemetryStreamsFrame(tk.Frame):
         self.streams_frame.grid(row=row, column=col)
         self.streams_frame.grid_propagate(False)
 
-        self.altitude_stream_label = tk.Label(self.streams_frame, text=f'Altitude: {self.altitude}')
-        self.speed_stream_label = tk.Label(self.streams_frame, text=f'Speed: {self.speed}')
-        self.apoapsis_stream_label = tk.Label(self.streams_frame, text=f'Apoapsis: {self.apoapsis}')
-        self.periapsis_stream_label = tk.Label(self.streams_frame, text=f'Periapsis: {self.periapsis}')
-        self.latitude_stream_label = tk.Label(self.streams_frame, text=f'Latitude: {self.latitude}')
-        self.longitude_stream_label = tk.Label(self.streams_frame, text=f'Longitude: {self.longitude}')
+        self.altitude_stream_label = tk.Label(self.streams_frame, text=f'Altitude: ')
+        self.speed_stream_label = tk.Label(self.streams_frame, text=f'Speed: ')
+        self.apoapsis_stream_label = tk.Label(self.streams_frame, text=f'Apoapsis: ')
+        self.periapsis_stream_label = tk.Label(self.streams_frame, text=f'Periapsis: ')
+        self.latitude_stream_label = tk.Label(self.streams_frame, text=f'Latitude: ')
+        self.longitude_stream_label = tk.Label(self.streams_frame, text=f'Longitude: ')
 
         self.altitude_stream_label.grid(row=0, column=0, pady=3)
         self.speed_stream_label.grid(row=1, column=0)

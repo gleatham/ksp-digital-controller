@@ -51,3 +51,10 @@ To dungeons deep and caverns old
 We must away, ere break of day,
 To find our long-forgotten gold.”
 ― J.R.R. Tolkien, The Hobbit
+
+JSON Example
+{"employees":[
+  { "firstName":"John", "lastName":"Doe" },
+  { "firstName":"Anna", "lastName":"Smith" },
+  { "firstName":"Peter", "lastName":"Jones" }
+]}

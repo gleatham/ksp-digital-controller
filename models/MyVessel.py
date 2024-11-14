@@ -2,13 +2,16 @@ import krpc
 import math
 import time
 
+import controllers.connect_to_ksp_controller
+
 
 class MyVessel:
     def __init__(self):
-        self.conn = krpc.connect()
-        self.vessel = self.conn.space_center.active_vessel
-        self.vessel.control.sas = False
-        self.vessel.control.sas_mode.stability_assist = False
+        self.is_connected = False
+
+        self.conn = None
+        self.vessel = None
+        self.flight_info = None
 
         # Set Defaults
         self.current_pitch = 0
@@ -17,18 +20,55 @@ class MyVessel:
         self.goal_apoapsis = 70000
         self.goal_periapsis = 70000
 
-        # Setup Streams
-        flight_info = self.vessel.flight()
-        self.current_altitude = self.conn.add_stream(getattr, flight_info, 'mean_altitude')
-        self.current_speed = self.conn.add_stream(getattr, flight_info, 'speed')
+        # Setup Telemetry Streams
+        #flight_info = self.vessel.flight()
+        self.current_altitude_stream = None
+        self.current_speed = None
+        self.current_apoapsis = None
+        self.current_periapsis = None
+
         # TODO: Fix the below varibles
-        self.current_apoapsis = self.conn.add_stream(getattr, self.vessel.orbit, 'apoapsis_altitude')
-        self.current_periapsis = self.conn.add_stream(getattr, self.vessel.orbit, 'periapsis_altitude')
         #self.current_latitude = self.conn.add_stream(getattr, self.vessel.orbit, 'latitude')
         #self.current_longitude = self.conn.add_stream(getattr, self.vessel.orbit, 'longitude')
 
         # Parts Lists
         self.experiments = []
+
+    # TODO: Add button to main to run connect()
+    def connect(self):
+        try:
+            self.conn = krpc.connect()
+            self.vessel = self.conn.space_center.active_vessel
+            self.vessel.control.sas = False
+            self.vessel.control.sas_mode.stability_assist = False
+            self.is_connected = True
+            controllers.connect_to_ksp_controller.ConnectToKSPController.update_status(self.is_connected)
+        except ConnectionError:
+            self.is_connected = False
+            controllers.connect_to_ksp_controller.ConnectToKSPController.update_status(self.is_connected)
+
+
+    # TODO: Add button to start telemetry, put it in the telemtry frame and make data appear after button pressed
+    def start_telemetry(self):
+        try:
+            self.flight_info = self.vessel.flight()
+            self.current_altitude_stream = self.conn.add_stream(getattr, self.flight_info, 'mean_altitude')
+            self.current_speed = self.conn.add_stream(getattr, self.flight_info, 'speed')
+            # TODO: Fix the below varibles
+            self.current_apoapsis = self.conn.add_stream(getattr, self.vessel.orbit, 'apoapsis_altitude')
+            self.current_periapsis = self.conn.add_stream(getattr, self.vessel.orbit, 'periapsis_altitude')
+            #self.current_latitude = self.conn.add_stream(getattr, self.vessel.orbit, 'latitude')
+            #self.current_longitude = self.conn.add_stream(getattr, self.vessel.orbit, 'longitude')
+        except AttributeError:
+            # TODO: Add pop-up window to warn user
+            print("Unable to start streams")
+
+    def get_altitude(self):
+        if self.current_altitude_stream is None:
+            pass
+        else:
+            return self.current_altitude_stream
+
 
     def throttle_up(self):
         if self.vessel.control.throttle == 1.0:

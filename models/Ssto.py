@@ -1,4 +1,5 @@
 import krpc
+import threading
 import time
 from models import MyVessel
 import math
@@ -9,7 +10,7 @@ class SSTO(MyVessel.MyVessel):
         super().__init__()
 
         self.name = 'SSTO'
-        self.landing_gear = [part for part in self.vessel.parts.wheels]
+        self.landing_gear = None
 
     def get_pitch(self):
         self.current_pitch = self.vessel.flight().pitch
@@ -25,6 +26,11 @@ class SSTO(MyVessel.MyVessel):
         self.vessel.auto_pilot.wait()
 
     def takeoff(self):
+        try:
+            self.landing_gear = [part for part in self.vessel.parts.wheels]
+        except AttributeError:
+            print(f"No landing gear available")
+
         print(f"Take off sequence initiated")
         self.vessel.control.brakes = False
 
@@ -146,5 +152,10 @@ class SSTO(MyVessel.MyVessel):
         self.get_to_400_meters_per_second()
         self.climb()
         self.glide_to_apoapsis()
+        self.final_burn()
 
         self.vessel.control.sas = True
+
+    def _orbit(self):
+        orbit_thread = threading.Thread(target=self.orbit)
+        orbit_thread.start()
