@@ -10,6 +10,6 @@ class ConnectToKSPController:
 
     def update_status(self, is_connected):
         if is_connected:
-            self.view.connection_status.config(state='Connected')
+            self.view.connection_status.set("Connected")
         else:
-            self.view.connection_status.config(state='Disconnected')
+            self.view.connection_status.set("Disconnected")

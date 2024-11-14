@@ -10,6 +10,7 @@ from views import TelemetryStreamsFrame
 from views import VesselResourcesFrame
 from views import ConnectToKSPFrame
 
+from models import State
 from models import MyVessel
 from models import rocket
 from models import Ssto
